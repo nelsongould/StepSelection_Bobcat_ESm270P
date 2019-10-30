@@ -1,0 +1,41 @@
+---
+title: "Step Selection Function for Bobcats in Vermont"
+author: "Nelson Gould"
+date: "10/30/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+#Loading Packages
+
+library(tidyverse)
+library(sf)
+library(raster)
+library(stringr) # for working with strings (pattern matching)
+library(tidyr) # for unite() and separate()
+library(ggspatial)
+library(RColorBrewer)
+library(ggplot2)
+
+```
+
+```{r}
+# Reading in movement data
+
+bobcat_move_raw <- read_csv("Farrell_etal_2018_data.csv")
+
+# Creating movement Shapefile from movement Lat/Long. Projecting into UTM Zone 18N (EPSG:26919)
+
+bobcat_move <- st_as_sf(bobcat_move_raw, coords = c("Easting","Northing"), crs = 26919)
+
+# Plotting to check projection 
+
+#ggplot() + geom_sf(data = bobcat_move, fill = "gray40", aes(color = bobcat_move$Cat))
+
+```
+
+
